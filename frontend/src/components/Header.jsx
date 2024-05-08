@@ -9,22 +9,21 @@ function Header() {
   const links = [
     { name: 'Home', to: '/' },
     { name: 'About', to: '/about' },
-    { name: 'Categories', to: '/categories' },
     { name: 'Contact', to: '/contact' }
   ]
 
   return (
-    <header className="bg-gray-100 dark:bg-[#21252d] py-4 shadow">
-      <div className="container mx-auto flex items-center justify-between px-4 md:px-6">
+    <header className="fixed top-0 left-0 w-full backdrop-blur-sm shadow z-50 bg-gray-100/80 dark:bg-[#21252d]/80">
+      <div className="container mx-auto flex items-center justify-between px-4 md:px-6 py-4">
         <NavLink className="flex items-center gap-2" to="/">
           <MountainIcon className="h-6 w-6 text-gray-900 dark:text-gray-50" />
           <span className="text-lg font-bold">Blog</span>
         </NavLink>
         <div className="flex items-center gap-0 sm:gap-2 md:gap-4">
           <nav className="hidden md:flex items-center gap-4">
-            {links.map((link) => (
+            {links.map((link, i) => (
               <NavLink
-                key={link.to}
+                key={i}
                 className="text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-gray-50"
                 to={link.to}>
                 {link.name}
