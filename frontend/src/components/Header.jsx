@@ -1,3 +1,4 @@
+import { useState } from 'react'
 import { NavLink } from 'react-router-dom'
 import { SearchIcon, MountainIcon, MenuIcon } from 'lucide-react'
 import { Button } from './ui/button'
@@ -11,6 +12,8 @@ function Header() {
     { name: 'About', to: '/about' },
     { name: 'Contact', to: '/contact' }
   ]
+
+  const [open, setOpen] = useState(false)
 
   return (
     <header className="fixed top-0 left-0 w-full backdrop-blur-sm shadow z-50 bg-gray-100/80 dark:bg-[#21252d]/80">
@@ -29,7 +32,7 @@ function Header() {
                 {link.name}
               </NavLink>
             ))}
-          <ThemeButton />
+            <ThemeButton />
           </nav>
           <div className="relative w-full max-w-md md:w-auto">
             <Input
@@ -39,7 +42,7 @@ function Header() {
             />
             <SearchIcon className="absolute right-6 md:right-3 top-1/2 h-5 w-5 -translate-y-1/2" />
           </div>
-          <Sheet>
+          <Sheet open={open} onOpenChange={setOpen}>
             <SheetTrigger asChild>
               <Button className="md:hidden border-none" size="icon" variant="outline">
                 <MenuIcon className="h-6 w-6" />
@@ -52,6 +55,7 @@ function Header() {
                   <NavLink
                     key={i}
                     className="flex items-center gap-2"
+                    onClick={() => setOpen(false)}
                     to={link.to}
                   >
                     {link.name}
