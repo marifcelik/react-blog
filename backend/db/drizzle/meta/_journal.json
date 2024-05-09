@@ -8,6 +8,13 @@
       "when": 1715272980703,
       "tag": "0000_icy_king_cobra",
       "breakpoints": true
+    },
+    {
+      "idx": 1,
+      "version": "5",
+      "when": 1715282242428,
+      "tag": "0001_grey_vampiro",
+      "breakpoints": true
     }
   ]
 }

@@ -7,7 +7,7 @@
     "build": "tsc && tsc-alias",
     "dev": "tsx watch --clear-screen=false main.ts",
     "start": "node ./dist/main.js",
-    "db:generate": "drizzle-kit generate:mysql",
+    "db:generate": "drizzle-kit generate:pg",
     "db:migrate": "tsx db/migrate.ts"
   },
   "keywords": [],

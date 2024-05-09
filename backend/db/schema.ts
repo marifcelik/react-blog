@@ -19,7 +19,7 @@ export const messages = pgTable('messages', {
     id: serial('id').primaryKey(),
     name: varchar('name').notNull(),
     email: varchar('email').notNull(),
-    content: text('content').notNull(),
+    message: text('message').notNull(),
     createdAt: timestamp('created_at').defaultNow()
 })
 
