@@ -1,12 +1,13 @@
-import express from 'express'
+import server from '@/server'
+import { log } from '@/utils/logger'
+import { HOST, PORT } from '@/config'
 
-const PORT = 3000
+function kill() {
+    server.close()
+    process.exit(0)
+}
 
-const app = express()
+process.on('SIGINT', kill)
+process.on('SIGTERM', kill)
 
-app.get('/', (_req, res) => {
-    console.log('Request received')
-    res.send('Hello World!')
-})
-
-app.listen(PORT, () => console.log(`Server is running on http://localhost:${PORT}`))
+server.listen(PORT, () => log.info(`Server running at http://${HOST}:${PORT}`))

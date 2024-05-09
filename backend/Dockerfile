@@ -10,6 +10,7 @@ RUN pnpm build
 RUN rm -rf src \
     tsconfig.json
 
+ENV NODE_ENV=production
 EXPOSE 5048
 
 CMD [ "pnpm", "start" ]
