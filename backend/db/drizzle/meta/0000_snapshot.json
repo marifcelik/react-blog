@@ -1,5 +1,5 @@
 {
-  "id": "45b06ba0-4e3c-4b46-83f6-7c882611689d",
+  "id": "59a4c81c-ce7c-4734-bac5-277f52738a08",
   "prevId": "00000000-0000-0000-0000-000000000000",
   "version": "5",
   "dialect": "pg",
@@ -26,8 +26,8 @@
           "primaryKey": false,
           "notNull": true
         },
-        "content": {
-          "name": "content",
+        "message": {
+          "name": "message",
           "type": "text",
           "primaryKey": false,
           "notNull": true

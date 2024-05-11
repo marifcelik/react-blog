@@ -42,7 +42,7 @@ export async function register(req: Request, res: Response) {
     try {
         const user = await db.select().from(users).where(eq(users.username, username))
         if (user.length > 0) {
-            return res.status(409).send("User already exists")
+            return res.status(409).send("Username already exists")
         }
         const salt = await bcrypt.genSalt(10)
         const hash = await bcrypt.hash(password, salt)

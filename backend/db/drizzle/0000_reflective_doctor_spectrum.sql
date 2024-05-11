@@ -2,7 +2,7 @@ CREATE TABLE IF NOT EXISTS "messages" (
 	"id" serial PRIMARY KEY NOT NULL,
 	"name" varchar NOT NULL,
 	"email" varchar NOT NULL,
-	"content" text NOT NULL,
+	"message" text NOT NULL,
 	"created_at" timestamp DEFAULT now()
 );
 --> statement-breakpoint
