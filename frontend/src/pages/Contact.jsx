@@ -1,21 +1,16 @@
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useForm } from 'react-hook-form'
 import { z } from 'zod'
+import { toast } from 'sonner'
 import { PhoneIcon, MailboxIcon, LocateIcon } from 'lucide-react'
-import { Card, CardHeader, CardTitle, CardDescription, CardContent } from '@/components/ui/card'
 import { Input } from '@/components/ui/input'
 import { Textarea } from '@/components/ui/textarea'
 import { Button } from '@/components/ui/button'
-import {
-  Form,
-  FormControl,
-  FormField,
-  FormItem,
-  FormLabel,
-  FormMessage,
-} from '@/components/ui/form'
+import { Card, CardHeader, CardTitle, CardDescription, CardContent } from '@/components/ui/card'
+import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from '@/components/ui/form'
+import { API_URL } from '@/lib/config'
 
-const ContactFormSchema = z.object({
+const contactFormSchema = z.object({
   name: z.string().min(2),
   email: z.string().email(),
   message: z.string().min(2)
@@ -23,7 +18,7 @@ const ContactFormSchema = z.object({
 
 function Contact() {
   const form = useForm({
-    resolver: zodResolver(ContactFormSchema),
+    resolver: zodResolver(contactFormSchema),
     defaultValues: {
       name: '',
       email: '',
@@ -31,31 +26,42 @@ function Contact() {
     }
   })
 
-  /** 
-   * @param {z.infer<typeof ContactFormSchema>} data
-   */
-  function onSubmit(data) {
-    console.log(data)
+  /** @param {z.infer<typeof contactFormSchema>} data */
+  async function onSubmit(data) {
+    const resp = await fetch(API_URL + '/messages', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(data)
+    })
+
+    if (resp.ok) {
+      const text = await resp.text()
+      toast.success(text)
+      form.reset()
+    } else {
+      toast.error('An error occurred. Please try again later.')
+      console.log(resp)
+    }
   }
 
   return (
-    <div className='container mx-auto'>
-      <section className="mt-12 md:mt-16 mx-auto">
-        <h2 className="text-2xl font-bold">Contact Us</h2>
+    <>
+      <section className="md:mt-16 mx-auto">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-          <div className='mt-5 md:mt-10'>
+          <div className='mt-5 md:mt-10 mx-auto'>
+            <h2 className="text-2xl font-bold inline-block mb-7">Contact Us</h2>
             <div className="flex items-center gap-4 mb-6">
               <PhoneIcon className="h-6 w-6" />
               <div>
                 <h3 className="text-lg font-bold">Phone</h3>
-                <p>+1 (555) 123-4567</p>
+                <a href='tel:+1 (555) 123-4567'>+1 (555) 123-4567</a>
               </div>
             </div>
             <div className="flex items-center gap-4 mb-6">
               <MailboxIcon className="h-6 w-6" />
               <div>
                 <h3 className="text-lg font-bold">Email</h3>
-                <p>info@blog.com</p>
+                <a href='mailto:info@blog.com'>info@blog.com</a>
               </div>
             </div>
             <div className="flex items-center gap-4">
@@ -67,7 +73,7 @@ function Contact() {
             </div>
           </div>
           <div>
-            <Card className='h-[35rem] w-11/12 mx-auto md:w-[27rem] md:pt-5'>
+            <Card className='min-h-fit w-11/12 mx-auto md:w-[27rem] md:py-5'>
               <CardHeader>
                 <CardTitle>Get in Touch</CardTitle>
                 <CardDescription>
@@ -124,7 +130,7 @@ function Contact() {
                         )}
                       />
                     </div>
-                    <Button type="submit">Send Message</Button>
+                    <Button type="submit" className='mt-3'>Send Message</Button>
                   </form>
                 </Form>
               </CardContent>
@@ -132,7 +138,7 @@ function Contact() {
           </div>
         </div>
       </section>
-    </div>
+    </>
   )
 }
 

@@ -56,15 +56,15 @@
   body {
     @apply bg-background text-foreground;
   }
-}
-
-html, body {
-  width: 100%;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-}
-
-#root {
-  flex: 1;
+  
+  html, body {
+    width: 100%;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+  }
+  
+  #root {
+    flex: 1;
+  }
 }
