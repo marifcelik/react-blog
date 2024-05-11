@@ -16,7 +16,7 @@ function Header() {
   const [open, setOpen] = useState(false)
 
   return (
-    <header className="fixed top-0 left-0 w-full backdrop-blur-sm shadow z-50 bg-gray-100/80 dark:bg-[#21252d]/80">
+    <header className="fixed top-0 left-0 w-full backdrop-blur shadow z-50 bg-gray-100/80 dark:bg-[#21252d]/90">
       <div className="container mx-auto flex items-center justify-between px-4 md:px-6 py-4">
         <NavLink className="flex items-center gap-2" to="/">
           <MountainIcon className="h-6 w-6 text-gray-900 dark:text-gray-50" />
