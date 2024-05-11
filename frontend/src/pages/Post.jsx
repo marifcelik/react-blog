@@ -1,8 +1,8 @@
 import { useState, useEffect } from "react"
+import { useParams } from "react-router-dom"
 import { ShareIcon, HeartIcon } from "lucide-react"
 import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar"
 import { Button } from "@/components/ui/button"
-import { useParams } from "react-router-dom"
 import { API_URL } from "@/lib/config"
 
 function Post() {

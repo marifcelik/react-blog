@@ -245,7 +245,7 @@ function Posts() {
   }
 
   return (
-    <div className="w-full md:w-4/5 mx-auto mt-28 px-3 md:px-0">
+    <div className="w-full md:w-4/5 mx-auto mt-12 px-3 md:px-0">
       <Dialog open={dialogOpen} onOpenChange={setDialogOpen} >
         <DialogContent>
           <DialogHeader>
