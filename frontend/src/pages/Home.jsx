@@ -18,7 +18,9 @@ function Home() {
           if (data[i].content.length > 100)
             data[i].content = data[i].content.substring(0, 97) + "..."
         }
-        setFirstPost(data.shift())
+        if (data.length > 1) {
+          setFirstPost(data.shift())
+        }
         setPosts(data)
         return
       }
