@@ -1,0 +1,33 @@
+services:
+  db:
+    image: postgres
+    environment:
+      POSTGRES_DB: blog
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+    volumes:
+      - ./backend/db/drizzle/:/docker-entrypoint-initdb.d/
+    ports:
+      - "5432:5432"
+
+  backend:
+    environment:
+      - DB_HOST=db
+      - DB_PORT=5432
+      - DB=blog
+      - DB_USER=postgres
+      - DB_PASS=postgres
+      - PORT
+      - SECRET
+    build: ./backend
+    depends_on:
+      - db
+    ports:
+      - "3000:3000"
+
+  frontend:
+    build: ./frontend
+    depends_on:
+      - backend
+    ports:
+      - "8080:80"
