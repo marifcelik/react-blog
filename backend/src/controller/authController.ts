@@ -16,17 +16,17 @@ export async function login(req: Request, res: Response) {
     try {
         const user = await db.select().from(users).where(eq(users.username, username))
         if (user.length === 0) {
-            return res.status(404).send("User not found")
+            return res.status(404).send("Invalid username or password")
         }
 
         const match = await bcrypt.compare(password, user[0].password)
         if (!match) {
-            return res.status(401).send("Invalid password")
+            return res.status(401).send("Invalid username or password")
         }
 
         const token = jwt.sign({ id: user[0].id }, SECRET)
         req.headers.authorization = `Bearer ${token}`
-        return res.status(200).send({ token })
+        return res.status(200).json({ token })
     } catch (err) {
         log.error(err)
         return res.status(500).send("Error while fetching user : " + err)
@@ -49,7 +49,7 @@ export async function register(req: Request, res: Response) {
 
         const result = await db.insert(users).values({ username, password: hash }).returning()
         log.info('user created\n%j', result)
-        return res.status(201).send("User created : ")
+        return res.status(201).send("User created, id : " + result[0].id)
     } catch (err) {
         log.error(err)
         return res.status(500).send("Error while creating user : " + err)

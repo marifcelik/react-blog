@@ -16,7 +16,7 @@ app.get('/', (_req, res) => {
 })
 
 app.use('/auth', router.authRouter)
-app.use('/messages', router.messageRouter)
 app.use('/posts', router.postRouter)
+app.use('/messages', router.messageRouter)
 
 export default createServer(app)

@@ -7,7 +7,7 @@ import { log } from "@/utils/logger"
 export async function getMessages(_req: Request, res: Response) {
     const result = await db.select().from(messages)
     log.info('messages fetched\n%j', result)
-    return res.status(200).send(result)
+    return res.status(200).json(result)
 }
 
 export async function getMessage(req: Request, res: Response) {
@@ -18,7 +18,7 @@ export async function getMessage(req: Request, res: Response) {
 
     const result = await db.select().from(messages).where(eq(messages.id, id))
     log.info('message fetched\n%j', result)
-    return res.status(200).send(result)
+    return res.status(200).json(result)
 }
 
 export async function createMessage(req: Request, res: Response) {
@@ -29,7 +29,7 @@ export async function createMessage(req: Request, res: Response) {
 
     const result = await db.insert(messages).values(message).returning()
     log.info('message created\n%j', result)
-    return res.status(201).send("Message created")
+    return res.status(201).send("Your message has been sent")
 }
 
 export async function deleteMessage(req: Request, res: Response) {
@@ -40,5 +40,5 @@ export async function deleteMessage(req: Request, res: Response) {
 
     const result = await db.delete(messages).where(eq(messages.id, id)).returning()
     log.info('message deleted\n%j', result)
-    return res.status(200).send("Message deleted")
+    return res.status(200).send("Message deleted successfully")
 }

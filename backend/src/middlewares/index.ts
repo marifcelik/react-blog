@@ -7,17 +7,19 @@ export function auth(req: Request, res: Response, next: NextFunction) {
     try {
         let token = req.headers.authorization
         if (!token) {
-            log.warn('No token provided from ', req.ip)
+            log.warn('No token provided from %s', req.ip)
             res.status(401).json({ message: 'failed', error: 'No token provided' })
             return
         }
         token = token.split(' ')[1]
         if (!token) {
-            log.warn('No token provided from ', req.ip)
+            log.warn('No token provided from %s', req.ip)
             res.status(401).json({ message: 'failed', error: 'No token provided' })
             return
         }
-        jwt.verify(token, SECRET)
+        const payload = jwt.verify(token, SECRET) as { id: number, iat: number, exp: number }
+        req.headers['x-user-id'] = payload.id.toString()
+        log.info("payload :  %j", payload)
         next()
     } catch (err) {
         if (err instanceof jwt.TokenExpiredError) {

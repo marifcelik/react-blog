@@ -1,12 +1,12 @@
 import express from 'express'
-import * as messageController from '../controller/messageController'
+import * as messageController from '@/controller/messageController'
 import * as middlewares from '@/middlewares'
 
-const authRouter = express.Router()
+const router = express.Router()
 
-authRouter.post('/', messageController.createMessage)
-authRouter.get('/', middlewares.auth, messageController.getMessages)
-authRouter.get('/:id', middlewares.auth, messageController.getMessage)
-authRouter.delete('/:id', middlewares.auth, messageController.deleteMessage)
+router.post('/', messageController.createMessage)
+router.get('/', middlewares.auth, messageController.getMessages)
+router.get('/:id', middlewares.auth, messageController.getMessage)
+router.delete('/:id', middlewares.auth, messageController.deleteMessage)
 
-export default authRouter
+export default router

@@ -2,13 +2,15 @@ import express from 'express'
 import * as postController from '../controller/postController'
 import * as middlewares from '@/middlewares'
 
-const postRouter = express.Router()
-postRouter.use(middlewares.auth)
+const router = express.Router()
 
-postRouter.get('/', postController.getPosts)
-postRouter.get('/:id', postController.getPost)
-postRouter.post('/', postController.createPost)
-postRouter.put('/:id', postController.updatePost)
-postRouter.delete('/:id', postController.deletePost)
+router.get('/', postController.getPosts)
+router.get('/:id', postController.getPost)
 
-export default postRouter
+router.use(middlewares.auth)
+
+router.post('/', postController.createPost)
+router.put('/:id', postController.updatePost)
+router.delete('/:id', postController.deletePost)
+
+export default router

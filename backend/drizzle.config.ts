@@ -6,7 +6,5 @@ export default {
     schema: 'db/schema.ts',
     out: 'db/drizzle',
     driver: 'pg',
-    dbCredentials: {
-        connectionString: DB_HOST
-    }
+    dbCredentials: { connectionString: DB_HOST }
 } satisfies Config
